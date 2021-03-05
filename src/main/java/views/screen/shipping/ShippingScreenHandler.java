@@ -68,7 +68,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 
 	protected void setupData(Object dto) throws Exception {
 		this.order = (Order) dto;
-		this.province.getItems().addAll(ShippingConfigs.PROVINCES);
+		this.province.getItems().addAll(ShippingConfigs.PROVINCES);    //Common Coupling
 		this.province.getSelectionModel().select(ShippingConfigs.RUSH_SUPPORT_PROVINCES_INDEX[0]);
 	}
 

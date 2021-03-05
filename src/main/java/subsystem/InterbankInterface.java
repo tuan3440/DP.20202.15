@@ -26,7 +26,7 @@ public interface InterbankInterface {
 	 * @throws UnrecognizedException if responded with an unknown error code or
 	 *                               something goes wrong
 	 */
-	public abstract PaymentTransaction payOrder(CreditCard card, int amount, String contents)
+	public abstract PaymentTransaction payOrder(CreditCard card, int amount, String contents) 
 			throws PaymentException, UnrecognizedException;
 
 	/**
