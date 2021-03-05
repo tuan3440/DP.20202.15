@@ -19,7 +19,6 @@ public class App extends Application {
 	@FXML
 	ImageView logo;
 
-	//pmtuan
 	@Override
 	public void start(Stage primaryStage) {
 		try {
