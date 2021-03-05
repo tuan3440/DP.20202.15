@@ -32,6 +32,7 @@ public class PlaceOrderController extends BaseController {
      * This method checks the availability of product when user click PlaceOrder button
      * @throws SQLException
      */
+  //Uncoupled coupling
     public void placeOrder() throws SQLException {
         SessionInformation.cartInstance.checkAvailabilityOfProduct();
     }
@@ -50,6 +51,7 @@ public class PlaceOrderController extends BaseController {
      * @param order
      * @return Invoice
      */
+  //Data coupling
     public Invoice createInvoice(Order order) {
         return new Invoice(order);
     }
@@ -60,6 +62,7 @@ public class PlaceOrderController extends BaseController {
      * @throws InterruptedException
      * @throws IOException
      */
+  //Data coupling
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
@@ -81,16 +84,16 @@ public class PlaceOrderController extends BaseController {
    * @throws InterruptedException
    * @throws IOException
    */
-
-    //Control coupling do info là tham số về mặt control
-    //Tức là nó điểu kiểu luồng của module được gọi
+    //(Bui Minh Tuan) minh nghi cho nay là Data coupling vi 3 bien trong ham if thi khac nhau va cac gia tri cua no co the kiem soat duoc
+    //Control coupling do info lÃ  tham sá»‘ vá»� máº·t control
+    //Tá»©c lÃ  nÃ³ Ä‘iá»ƒu kiá»ƒu luá»“ng cá»§a module Ä‘Æ°á»£c gá»�i
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
         || validateName(info.get("name"))
         || validateAddress(info.get("address"))) return;
         else throw new InvalidDeliveryInfoException();
     }
-    
+    //Data coupling
     public boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.length() != 10) return false;
         if (!phoneNumber.startsWith("0")) return false;
@@ -101,7 +104,7 @@ public class PlaceOrderController extends BaseController {
         }
         return true;
     }
-    
+    ////Data coupling
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -109,7 +112,7 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
-    
+    ////Data coupling
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         String patternString = "^[a-zA-Z\\s]*$";

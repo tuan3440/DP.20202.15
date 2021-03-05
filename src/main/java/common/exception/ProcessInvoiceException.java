@@ -13,7 +13,7 @@ public class ProcessInvoiceException extends AimsException {
 	public ProcessInvoiceException() {
 
 	}
-
+	//Data coupling
 	public ProcessInvoiceException(String message) {
 		super(message);
 	}

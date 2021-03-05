@@ -13,7 +13,7 @@ public class ViewCartException extends AimsException {
 	public ViewCartException() {
 
 	}
-
+	//Data coupling
 	public ViewCartException(String message) {
 		super(message);
 	}

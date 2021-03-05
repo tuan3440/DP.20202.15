@@ -1,7 +1,8 @@
 package common.exception;
 
 public class NotEnoughTransactionInfoException extends PaymentException {
-public NotEnoughTransactionInfoException() {
+	//Uncoupled coupling
+	public NotEnoughTransactionInfoException() {
 	super("ERROR: Not Enough Transcation Information");
 }
 }

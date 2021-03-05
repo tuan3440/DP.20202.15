@@ -19,7 +19,7 @@ import java.util.Objects;
  * @author
  */
 public class AuthenticationController extends BaseController {
-
+	//Data coupling
     public boolean isAnonymousSession() {
         try {
             getMainUser();
@@ -28,7 +28,7 @@ public class AuthenticationController extends BaseController {
             return true;
         }
     }
-
+    //Content coupling vi thay doi du lieu bien mainUser, expiredTime mot cach truc tiep
     public User getMainUser() throws ExpiredSessionException {
         if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
             logout();
@@ -47,7 +47,7 @@ public class AuthenticationController extends BaseController {
             throw new FailLoginException();
         }
     }
-
+    //Content coupling vi thay doi du lieu bien mainUser, expiredTime mot cach truc tiep
     public void logout() {
         SessionInformation.mainUser = null;
         SessionInformation.expiredTime = null;
@@ -60,6 +60,7 @@ public class AuthenticationController extends BaseController {
      * @param message - plain text as {@link String String}.
      * @return cipher text as {@link String String}.
      */
+    //Data coupling
     private String md5(String message) {
         String digest = null;
         try {

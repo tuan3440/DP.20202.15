@@ -13,7 +13,7 @@ import java.util.List;
  * @author
  */
 public class MediaDAO {
-
+	//Data coupling
     public List getAllMedia() throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
@@ -31,7 +31,7 @@ public class MediaDAO {
         }
         return medium;
     }
-
+  //Data coupling
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();
@@ -50,7 +50,7 @@ public class MediaDAO {
         return null;
     }
 
-
+  //Data coupling
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         if (value instanceof String){

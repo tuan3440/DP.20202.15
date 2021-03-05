@@ -13,7 +13,7 @@ public class MediaNotAvailableException extends AimsException {
 	public MediaNotAvailableException() {
 
 	}
-
+	//Data coupling
 	public MediaNotAvailableException(String message) {
 		super(message);
 	}

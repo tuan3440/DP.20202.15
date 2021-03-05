@@ -17,6 +17,7 @@ public class HomeController extends BaseController {
      * @return List[Media]
      * @throws SQLException
      */
+	//Data coupling
     public static List getAllMedia() throws SQLException{
         return new MediaDAO().getAllMedia();
     }
