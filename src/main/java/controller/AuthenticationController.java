@@ -36,6 +36,7 @@ public class AuthenticationController extends BaseController {
         } else return SessionInformation.mainUser.cloneInformation();
     }
 
+    //    Content coupling do trực tiếp thay đổi dữ liệu của lớp SessionInformation
     public void login(String email, String password) throws Exception {
         try {
             User user = new UserDAO().authenticate(email, md5(password));
