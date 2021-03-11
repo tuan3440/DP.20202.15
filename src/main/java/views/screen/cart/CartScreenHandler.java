@@ -90,11 +90,11 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 		});
 	}
-
+	//Coincidental cohesion
 	public ViewCartController getBController(){
 		return (ViewCartController) super.getBController();
 	}
-
+	//Coincidental cohesion
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
 		setPreviousScreen(prevScreen);
 		setScreenTitle("Cart Screen");
@@ -102,7 +102,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		displayCartWithMediaAvailability();
 		show();
 	}
-
+	//Coincidental cohesion
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
@@ -134,12 +134,12 @@ public class CartScreenHandler extends BaseScreenHandler {
 			displayCartWithMediaAvailability();
 		}
 	}
-
+	//Coincidental cohesion
 	public void updateCart() throws SQLException{
 		getBController().checkAvailabilityOfProduct();
 		displayCartWithMediaAvailability();
 	}
-
+	//Coincidental cohesion
 	void updateCartAmount(){
 		// calculate subtotal and amount
 		int subtotal = getBController().getCartSubtotal();
