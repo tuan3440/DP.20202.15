@@ -44,6 +44,14 @@ public class PaymentController extends BaseController {
 	 * @throws InvalidCardException - if the string does not represent a valid date
 	 *                              in the expected format
 	 */
+	
+	/**
+	 * Bui Tuan __ Coincidetal conhesion : phuong thuc getExprirtionDate khong co lien quan den phuong thuc
+	 * empty card trong lop
+	 * @param date
+	 * @return
+	 * @throws InvalidCardException
+	 */
 	//Data coupling
 	private String getExpirationDate(String date) throws InvalidCardException {
 		String[] strs = date.split("/");
