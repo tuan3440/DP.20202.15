@@ -18,6 +18,7 @@ public class BaseController {
      * @return CartMedia or null
      */
 	//Data coupling
+	//Functional Conhesion
     public CartItem checkMediaInCart(Media media){
         return SessionInformation.cartInstance.checkMediaInCart(media);
     }
@@ -27,6 +28,7 @@ public class BaseController {
      * @return List[CartMedia]
      */
     //Uncoupled coupling
+    //Functional Conhesion
     public List getListCartMedia(){
         return SessionInformation.cartInstance.getListMedia();
     }

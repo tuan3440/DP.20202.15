@@ -31,6 +31,7 @@ public class Cart {
         lstCartItem.clear();
     }
   //Data coupling
+    //Functional Conhesion
     public int getTotalMedia(){
         int total = 0;
         for (Object obj : lstCartItem) {
@@ -40,6 +41,7 @@ public class Cart {
         return total;
     }
   //Data coupling
+    //Functional Conhesion
     public int calSubtotal(){
         int total = 0;
         for (Object obj : lstCartItem) {
@@ -49,6 +51,7 @@ public class Cart {
         return total;
     }
   //Data coupling
+    //Functional Conhesion
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvailable = true;
         for (Object object : lstCartItem) {
@@ -59,6 +62,7 @@ public class Cart {
         }
         if (!allAvailable) throw new MediaNotAvailableException("Some media not available");
     }
+    //Functional Conhesion
     //Stamp coupling vi no chi su dung 1 thuoc tinh id trong bien media truyen vao
     public CartItem checkMediaInCart(Media media){
         for (CartItem cartItem : lstCartItem) {

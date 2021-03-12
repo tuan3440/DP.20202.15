@@ -45,13 +45,7 @@ public class PaymentController extends BaseController {
 	 *                              in the expected format
 	 */
 	
-	/**
-	 * Bui Tuan __ Coincidetal conhesion : phuong thuc getExprirtionDate khong co lien quan den phuong thuc
-	 * empty card trong lop
-	 * @param date
-	 * @return
-	 * @throws InvalidCardException
-	 */
+	//Functional Conhesion
 	//Data coupling
 	private String getExpirationDate(String date) throws InvalidCardException {
 		String[] strs = date.split("/");
@@ -90,6 +84,7 @@ public class PaymentController extends BaseController {
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
 	 */
+	//Functional Conhesion
 	//Data coupling
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
@@ -112,6 +107,7 @@ public class PaymentController extends BaseController {
 		}
 		return result;
 	}
+	//Functional Conhesion
 	//Data coupling
 	public void emptyCart(){
         SessionInformation.cartInstance.emptyCart();

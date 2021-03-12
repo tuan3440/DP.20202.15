@@ -18,6 +18,7 @@ public class HomeController extends BaseController {
      * @throws SQLException
      */
 	//Data coupling
+	//Functional Conhesion
     public static List getAllMedia() throws SQLException{
         return new MediaDAO().getAllMedia();
     }

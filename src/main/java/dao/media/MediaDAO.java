@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class MediaDAO {
 	//Data coupling
+	//Communicational conhesion vi getAllMedia va getMediaById cung tra ve  1 list cac media (cung tra ve 1 du lieu dau ra)
     public List getAllMedia() throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
@@ -31,6 +32,7 @@ public class MediaDAO {
         }
         return medium;
     }
+  //Communicational conhesion vi getAllMedia va getMediaById cung tra ve  1 list cac media (cung tra ve 1 du lieu dau ra)
   //Data coupling
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
@@ -49,7 +51,8 @@ public class MediaDAO {
         }
         return null;
     }
-
+    //Procedural conhesion : vi phuong thuc updateMediaById duoc nhom lai 
+    //vi theo 1 trinh tu la getMedia, updateMedia,(nhu la read, update, delete, create)
   //Data coupling
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();

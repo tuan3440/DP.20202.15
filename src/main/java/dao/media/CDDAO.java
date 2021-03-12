@@ -12,6 +12,7 @@ import java.util.Date;
  * @author
  */
 public class CDDAO extends MediaDAO {
+	//Functional Conhesion
 	//Data coupling
     @Override
     public Media getMediaById(int id) throws SQLException {

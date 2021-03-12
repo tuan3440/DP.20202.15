@@ -20,6 +20,7 @@ import java.util.Objects;
  */
 public class AuthenticationController extends BaseController {
 	//Data coupling
+	//Functional Conhesion
     public boolean isAnonymousSession() {
         try {
             getMainUser();
@@ -28,6 +29,7 @@ public class AuthenticationController extends BaseController {
             return true;
         }
     }
+    //Functional Conhesion
     //Content coupling vi thay doi du lieu bien mainUser, expiredTime mot cach truc tiep
     public User getMainUser() throws ExpiredSessionException {
         if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
@@ -35,7 +37,7 @@ public class AuthenticationController extends BaseController {
             throw new ExpiredSessionException();
         } else return SessionInformation.mainUser.cloneInformation();
     }
-
+    //Functional Conhesion
     //    Content coupling do trực tiếp thay đổi dữ liệu của lớp SessionInformation
     public void login(String email, String password) throws Exception {
         try {
@@ -47,6 +49,7 @@ public class AuthenticationController extends BaseController {
             throw new FailLoginException();
         }
     }
+    //Functional Conhesion
     //Content coupling vi thay doi du lieu bien mainUser, expiredTime mot cach truc tiep
     public void logout() {
         SessionInformation.mainUser = null;
@@ -60,6 +63,7 @@ public class AuthenticationController extends BaseController {
      * @param message - plain text as {@link String String}.
      * @return cipher text as {@link String String}.
      */
+    //Functional Conhesion
     //Data coupling
     private String md5(String message) {
         String digest = null;
