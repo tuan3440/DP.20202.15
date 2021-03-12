@@ -28,7 +28,7 @@ public class FXMLScreenHandler {
 		return this.loader;
 	}
 
-	public void setImage(ImageView imv, String path){
+	public void setImage(ImageView imv, String path){  //Coincidental Cohesion vi phuong thuc nay khong lien quan den cac phuong thuc con lai cua class
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
 		imv.setImage(img);

@@ -51,6 +51,7 @@ public class Order {
         return deliveryInfo;
     }
 
+    //Temporal cohesion vi thuc hien 2 viec cung luc
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         this.shippingFees = deliveryInfo.calculateShippingFee(this);
