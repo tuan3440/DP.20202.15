@@ -10,7 +10,7 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;
+    protected DistanceCalculator distanceCalculator;  //SOLID: vi pham nguyen ly OCP vi sau nay neu su dung thu vien khac se phai sua truc tiep ma nguon
 
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
@@ -20,8 +20,9 @@ public class DeliveryInfo {
         this.shippingInstructions = shippingInstructions;
         this.distanceCalculator = distanceCalculator;
     }
+    //SOLID: vi pham nguyen ly OCP vi sau nay se thay doi cach tinh phi ship
+    public int calculateShippingFee(Order order) {   // stamp coupling vì biến order không được sử dụng
 
-    public int calculateShippingFee(Order order) {   // Stamp Coupling vì tham số order không được sử dụng 
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);
     }

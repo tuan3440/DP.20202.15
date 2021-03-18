@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * @author
  */
-public class AuthenticationController extends BaseController {
+public class AuthenticationController extends BaseController {  //SOLID: vi pham nguyen tac LSP vi lop con AuthenticationController khong su dung 2 phuong thuc cua lop cha
 	//Data coupling
 	//Functional Conhesion
     public boolean isAnonymousSession() {

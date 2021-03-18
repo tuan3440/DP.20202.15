@@ -48,7 +48,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-    PaymentTransaction extractPaymentTransaction(String responseText) {
+    PaymentTransaction extractPaymentTransaction(String responseText) {  //SOLID: vi pham nguyen ly OCP va DIP vi sau nay them phuong thuc thanh toan moi
         MyMap response = convertJSONResponse(responseText);
 
         if (response == null)
@@ -114,7 +114,8 @@ public class InterbankPayloadConverter {
      * @author hieudm
      * @return the current time as {@link String String}.
      */
-    private String getToday() {   //Coincidental cohesion vì phương thức này không liên quan đến các phương thức khác trong class
+    private String getToday() {     //Coincidental Cohesion vi phuong thuc nay khong lien quan den cac phuong thuc con lai cua class
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);

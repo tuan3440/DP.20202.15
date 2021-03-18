@@ -84,7 +84,8 @@ public class PaymentController extends BaseController {
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
 	 */
-	//Functional Conhesion
+
+	//SOLID: vi pham nguyen tac OCP va DIP vi khi thay doi cach thuc thanh toan se phai sua code
 	//Data coupling
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
