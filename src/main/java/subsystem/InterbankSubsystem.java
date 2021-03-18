@@ -30,7 +30,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 * @see InterbankInterface#payOrder(CreditCard, int,
 	 *      String)
 	 */
-	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
+	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {   
 		PaymentTransaction transaction = ctrl.payOrder(card, amount, contents);
 		return transaction;
 	}
@@ -39,7 +39,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 * @see InterbankInterface#refund(CreditCard, int,
 	 *      String)
 	 */
-	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
+	public PaymentTransaction refund(CreditCard card, int amount, String contents) {     
 		PaymentTransaction transaction = ctrl.refund(card, amount, contents);
 		return transaction;
 	}

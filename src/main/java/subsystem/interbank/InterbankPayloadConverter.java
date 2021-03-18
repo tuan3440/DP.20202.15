@@ -22,7 +22,7 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
-    String convertToRequestPayload(CreditCard card, int amount, String contents) {
+    String convertToRequestPayload(CreditCard card, int amount, String contents) {  
         Map<String, Object> transaction = new MyMap();
 
         try {
@@ -31,13 +31,13 @@ public class InterbankPayloadConverter {
             // TODO Auto-generated catch block
             throw new InvalidCardException();
         }
-        transaction.put("command", InterbankConfigs.PAY_COMMAND);
+        transaction.put("command", InterbankConfigs.PAY_COMMAND); 
         transaction.put("transactionContent", contents);
         transaction.put("amount", amount);
         transaction.put("createdAt", getToday());
 
         Map<String, Object> requestMap = new MyMap();
-        requestMap.put("version", InterbankConfigs.VERSION);
+        requestMap.put("version", InterbankConfigs.VERSION); 
         requestMap.put("transaction", transaction);
 
         return ((MyMap) requestMap).toJSON();
@@ -115,6 +115,7 @@ public class InterbankPayloadConverter {
      * @return the current time as {@link String String}.
      */
     private String getToday() {     //Coincidental Cohesion vi phuong thuc nay khong lien quan den cac phuong thuc con lai cua class
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);

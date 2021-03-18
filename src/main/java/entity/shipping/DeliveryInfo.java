@@ -20,9 +20,9 @@ public class DeliveryInfo {
         this.shippingInstructions = shippingInstructions;
         this.distanceCalculator = distanceCalculator;
     }
-
     //SOLID: vi pham nguyen ly OCP vi sau nay se thay doi cach tinh phi ship
     public int calculateShippingFee(Order order) {   // stamp coupling vì biến order không được sử dụng
+
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);
     }

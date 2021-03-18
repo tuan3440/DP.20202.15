@@ -32,6 +32,7 @@ public class PlaceOrderController extends BaseController {
      * This method checks the availability of product when user click PlaceOrder button
      * @throws SQLException
      */
+    //Functional Conhesion
   //Uncoupled coupling
     public void placeOrder() throws SQLException {
         SessionInformation.cartInstance.checkAvailabilityOfProduct();
@@ -42,6 +43,7 @@ public class PlaceOrderController extends BaseController {
      * @return Order
      * @throws SQLException
      */
+    //Functional Conhesion
     public Order createOrder() throws SQLException {
         return new Order(SessionInformation.cartInstance);
     }
@@ -51,6 +53,7 @@ public class PlaceOrderController extends BaseController {
      * @param order
      * @return Invoice
      */
+    //Functional Conhesion
   //Data coupling
     public Invoice createInvoice(Order order) {
         return new Invoice(order);
@@ -62,6 +65,7 @@ public class PlaceOrderController extends BaseController {
      * @throws InterruptedException
      * @throws IOException
      */
+    //Functional Conhesion
   //Data coupling
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
@@ -93,6 +97,7 @@ public class PlaceOrderController extends BaseController {
         || validateAddress(info.get("address"))) return;
         else throw new InvalidDeliveryInfoException();
     }
+    //Functional Conhesion
     //Data coupling
     public boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.length() != 10) return false;
@@ -104,7 +109,8 @@ public class PlaceOrderController extends BaseController {
         }
         return true;
     }
-    ////Data coupling
+    //Functional Conhesion
+    //Data coupling
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -112,7 +118,8 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
-    ////Data coupling
+    //Functional Conhesion
+    //Data coupling
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
