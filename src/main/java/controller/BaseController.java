@@ -20,7 +20,7 @@ public class BaseController {
 	//Data coupling
 	//Functional Conhesion
     public CartItem checkMediaInCart(Media media){
-        return SessionInformation.getCartInstance().checkMediaInCart(media);
+        return SessionInformation.cart.checkMediaInCart(media);
     }
 
     /**
@@ -30,6 +30,6 @@ public class BaseController {
     //Uncoupled coupling
     //Functional Conhesion
     public List getListCartMedia(){
-        return SessionInformation.getCartInstance().getListMedia();
+        return SessionInformation.cart.getListMedia();
     }
 }

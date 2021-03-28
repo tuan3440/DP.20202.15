@@ -16,7 +16,7 @@ public class ViewCartController extends BaseController{
      */
 	//Functional Conhesion
     public void checkAvailabilityOfProduct() throws SQLException{
-        SessionInformation.getCartInstance().checkAvailabilityOfProduct();
+        SessionInformation.cart.checkAvailabilityOfProduct();
     }
 
     /**
@@ -26,7 +26,7 @@ public class ViewCartController extends BaseController{
     //Functional Conhesion
   //Data coupling
     public int getCartSubtotal(){
-        int subtotal = SessionInformation.getCartInstance().calSubtotal();
+        int subtotal = SessionInformation.cart.calSubtotal();
         return subtotal;
     }
 

@@ -7,11 +7,18 @@ import java.util.List;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
-public class Cart {
+public class Cart {  //vi khi he thong hoat dong chi co duy nhat 1 cart duoc tao ra
     
+	private static Cart cart;
+	
     private List<CartItem> lstCartItem;
 
-    public Cart() {
+    public synchronized static Cart getInstance() {
+    	if(cart == null) cart = new Cart();
+    	return cart;
+    }
+    
+    private Cart() {
         lstCartItem = new ArrayList<>();
     }
 

@@ -1,0 +1,15 @@
+Bài 1: Coupling
+Subteam 1: Bùi Minh Tuấn, Nguyễn Văn Tuấn
+Subteam 2: Nguyễn Văn Tuấn, Phạm Mạnh Tuấn
+
+Bài 2: Cohesion
+Subteam 1: Bùi Minh Tuấn, Nguyễn Văn Tuấn
+Subteam 2: Nguyễn Văn Tuấn, Phạm Mạnh Tuấn
+
+Bài 3: SOLID
+Subteam 1: Bùi Minh Tuấn, Nguyễn Văn Tuấn
+Subteam 2: Nguyễn Văn Tuấn, Phạm Mạnh Tuấn
+
+Bài 4: Singleton
+Subteam 1: Bùi Minh Tuấn, Phạm Mạnh Tuấn
+Subteam 2: Nguyễn Văn Tuấn, Nguyễn Văn Tuấn

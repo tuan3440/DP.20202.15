@@ -111,6 +111,6 @@ public class PaymentController extends BaseController {
 	//Functional Conhesion
 	//Data coupling
 	public void emptyCart(){
-        SessionInformation.getCartInstance().emptyCart();
+        SessionInformation.cart.emptyCart();
     }
 }

@@ -26,7 +26,7 @@ public class Order {
 
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for (Object object : SessionInformation.getCartInstance().getListMedia()) {   // Common coupling vì sử dụng chung biến cartInstance
+        for (Object object : SessionInformation.cart.getListMedia()) {   // Common coupling vì sử dụng chung biến cartInstance
             CartItem cartItem = (CartItem) object;                               // Content coupling vì thay đổi trực tiếp giá trị của biến cartInstance
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),
