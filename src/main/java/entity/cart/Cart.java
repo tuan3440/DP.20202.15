@@ -8,10 +8,17 @@ import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
 public class Cart {
-    
+
+    private static Cart cart;
+
     private List<CartItem> lstCartItem;
 
-    public Cart() {
+    public synchronized static Cart getInstance() {
+        if(cart == null) cart = new Cart();
+        return cart;
+    }
+
+    private Cart() {
         lstCartItem = new ArrayList<>();
     }
 
@@ -30,7 +37,7 @@ public class Cart {
     public void emptyCart(){
         lstCartItem.clear();
     }
-  //Data coupling
+    //Data coupling
     //Functional Conhesion
     public int getTotalMedia(){
         int total = 0;
@@ -40,7 +47,7 @@ public class Cart {
         }
         return total;
     }
-  //Data coupling
+    //Data coupling
     //Functional Conhesion
     public int calSubtotal(){
         int total = 0;
@@ -50,7 +57,7 @@ public class Cart {
         }
         return total;
     }
-  //Data coupling
+    //Data coupling
     //Functional Conhesion
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvailable = true;
