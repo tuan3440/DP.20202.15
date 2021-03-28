@@ -36,7 +36,7 @@ public class PlaceOrderController extends BaseController {
     //Functional Conhesion
   //Uncoupled coupling
     public void placeOrder() throws SQLException {
-        SessionInformation.cartInstance.checkAvailabilityOfProduct();
+        SessionInformation.cart.checkAvailabilityOfProduct();
     }
 
     /**
@@ -46,7 +46,7 @@ public class PlaceOrderController extends BaseController {
      */
     //Functional Conhesion
     public Order createOrder() throws SQLException {
-        return new Order(SessionInformation.cartInstance);
+        return new Order(SessionInformation.cart);
     }
 
     /**
