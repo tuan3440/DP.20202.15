@@ -65,8 +65,8 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     int getRequestQuantity() {
         return spinnerChangeNumber.getValue();
     }
-
-    private void setMediaInfo() throws SQLException {
+    @Override
+	protected void setMediaInfo() throws SQLException {
         // set the cover image of media
         File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());

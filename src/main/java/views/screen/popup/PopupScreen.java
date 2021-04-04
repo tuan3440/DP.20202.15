@@ -22,7 +22,7 @@ public class PopupScreen extends BaseScreenHandler {
     Label message;
 
     public PopupScreen(Stage stage) throws IOException{
-        super(stage, ViewsConfig.POPUP_PATH);
+        super(stage, ViewsConfig.POPUP_PATH,null);
     }
 
     private static PopupScreen popup(String message, String imagePath, Boolean undecorated) throws IOException{
@@ -66,10 +66,10 @@ public class PopupScreen extends BaseScreenHandler {
         delay.setOnFinished( event -> stage.close() );
         delay.play();
     }
-
+    @Override
     protected void setupData(Object dto) throws Exception {
     }
-
+    @Override
     protected void setupFunctionality() throws Exception {
     }
 }

@@ -24,7 +24,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	private String message;
 
 	public ResultScreenHandler(Stage stage, String screenPath, Map<String, String> response) throws IOException {
-		super(stage, screenPath);
+		super(stage, screenPath,null);
 		try {
 			setupData(response);
 			setupFunctionality();
@@ -37,13 +37,13 @@ public class ResultScreenHandler extends BaseScreenHandler {
 		}
 	}
 
-
+	@Override
 	protected void setupData(Object dto) throws Exception {
 		Map<String, String> response = (Map<String, String>) dto;
 		resultLabel.setText(response.get("RESULT"));
 		messageLabel.setText(response.get("MESSAGE"));
 	}
-
+	@Override
 	protected void setupFunctionality() throws Exception {
 		return;
 	}

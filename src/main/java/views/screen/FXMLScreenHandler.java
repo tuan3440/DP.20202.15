@@ -2,6 +2,7 @@ package views.screen;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -32,5 +33,7 @@ public class FXMLScreenHandler {
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
 		imv.setImage(img);
+	}
+	protected void setMediaInfo() throws SQLException {
 	}
 }
