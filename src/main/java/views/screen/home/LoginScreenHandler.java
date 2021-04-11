@@ -64,10 +64,10 @@ public class LoginScreenHandler extends BaseScreenHandler{
     void login(MouseEvent event) throws IOException, InterruptedException, SQLException {
         try {
             getBController().login(email.getText(), password.getText());
-            PopupScreen.success("Login Successfully!");
+            PopupScreen.showSuccessPopup("Login Successfully!");
             backToHomeScreen(event);
         } catch (Exception ex) {
-            PopupScreen.error(ex.getMessage());
+            PopupScreen.showErrorPopup(ex.getMessage());
         }
     }
 

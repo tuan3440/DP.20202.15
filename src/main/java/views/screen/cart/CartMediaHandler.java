@@ -25,9 +25,9 @@ import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 
-public class MediaHandler extends FXMLScreenHandler {
+public class CartMediaHandler extends FXMLScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
+	private static Logger LOGGER = Utils.getLogger(CartMediaHandler.class.getName());
 
 	@FXML
 	protected HBox hboxMedia;
@@ -60,7 +60,7 @@ public class MediaHandler extends FXMLScreenHandler {
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
 
-	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
+	public CartMediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
 		hboxMedia.setAlignment(Pos.CENTER);

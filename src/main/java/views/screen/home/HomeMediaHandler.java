@@ -25,7 +25,7 @@ import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 
-public class MediaHandler extends FXMLScreenHandler implements Observable {
+public class HomeMediaHandler extends FXMLScreenHandler implements Observable {
 
     @FXML
     protected ImageView mediaImage;
@@ -45,11 +45,11 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     @FXML
     protected Button addToCartBtn;
 
-    private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
+    private static Logger LOGGER = Utils.getLogger(HomeMediaHandler.class.getName());
     private Media media;
     private List<Observer> observerList;
 
-    public MediaHandler(String screenPath, Media media) throws SQLException, IOException{
+    public HomeMediaHandler(String screenPath, Media media) throws SQLException, IOException{
         super(screenPath);
         this.media = media;
         this.observerList = new ArrayList<>();
