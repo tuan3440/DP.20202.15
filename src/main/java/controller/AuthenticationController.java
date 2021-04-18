@@ -21,6 +21,7 @@ import java.util.Objects;
 public class AuthenticationController extends BaseController {  //SOLID: vi pham nguyen tac LSP vi lop con AuthenticationController khong su dung 2 phuong thuc cua lop cha
 	//Data coupling
 	//Functional Conhesion
+	final int HOURS = 24;
     public boolean isAnonymousSession() {
         try {
             getMainUser();
@@ -32,7 +33,11 @@ public class AuthenticationController extends BaseController {  //SOLID: vi pham
     //Functional Conhesion
     //Content coupling vi thay doi du lieu bien mainUser, expiredTime mot cach truc tiep
     public User getMainUser() throws ExpiredSessionException {
-        if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
+    	//Data-Level Refactoring/Introduce an intermediate variable
+    	final boolean isMainUserNotNull = SessionInformation.mainUser != null;
+    	final boolean isExpiredTimeNotNull = SessionInformation.expiredTime != null;
+    	final boolean isExpriredTimeBefore =  SessionInformation.expiredTime.isBefore(LocalDateTime.now());
+        if (isMainUserNotNull || isExpiredTimeNotNull || isExpriredTimeBefore) {
             logout();
             throw new ExpiredSessionException();
         } else return SessionInformation.mainUser.cloneInformation();
@@ -44,7 +49,7 @@ public class AuthenticationController extends BaseController {  //SOLID: vi pham
             User user = new UserDAO().authenticate(email, md5(password));
             if (Objects.isNull(user)) throw new FailLoginException();
             SessionInformation.mainUser = user;
-            SessionInformation.expiredTime = LocalDateTime.now().plusHours(24);
+            SessionInformation.expiredTime = LocalDateTime.now().plusHours(HOURS);
         } catch (SQLException ex) {
             throw new FailLoginException();
         }

@@ -8,6 +8,8 @@ import entity.order.Order;
 import entity.order.OrderItem;
 import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;
+import utils.ValidatorUtils;
+
 import org.example.DistanceCalculator;
 
 import java.io.IOException;
@@ -23,7 +25,7 @@ import java.util.regex.Pattern;
  */
 //SOLID: vi pham nguyen tac SRP  vi 1 lop PlaceOrderController co 2 nhiem vu : 1 la Order , 2 la Validate cac thanh phan cua Order
 public class PlaceOrderController extends BaseController {
-
+	
     /**
      * Just for logging purpose
      */
@@ -94,39 +96,13 @@ public class PlaceOrderController extends BaseController {
     //Control coupling do info lÃ  tham sá»‘ vá»� máº·t control
     //Tá»©c lÃ  nÃ³ Ä‘iá»ƒu kiá»ƒu luá»“ng cá»§a module Ä‘Æ°á»£c gá»�i
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
-        if (validatePhoneNumber(info.get("phone"))
-        || validateName(info.get("name"))
-        || validateAddress(info.get("address"))) return;
+    	 final boolean isPhoneNumber = ValidatorUtils.getInstance().validatePhoneNumber(info.get("phone"));
+         final boolean isName = ValidatorUtils.getInstance().validateString(info.get("name"));
+         final boolean isAddress = ValidatorUtils.getInstance().validateString(info.get("address"));
+
+     	if (isPhoneNumber
+         || isName
+         || isAddress) return;
         else throw new InvalidDeliveryInfoException();
-    }
-    //Functional Conhesion
-    //Data coupling
-    public boolean validatePhoneNumber(String phoneNumber) {
-        if (phoneNumber.length() != 10) return false;
-        if (!phoneNumber.startsWith("0")) return false;
-        try {
-            Integer.parseInt(phoneNumber);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
-    //Functional Conhesion
-    //Data coupling
-    public boolean validateName(String name) {
-        if (Objects.isNull(name)) return false;
-        String patternString = "^[a-zA-Z\\s]*$";
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(name);
-        return matcher.matches();
-    }
-    //Functional Conhesion
-    //Data coupling
-    public boolean validateAddress(String address) {
-        if (Objects.isNull(address)) return false;
-        String patternString = "^[a-zA-Z\\s]*$";
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(address);
-        return matcher.matches();
-    }
+    } 
 }

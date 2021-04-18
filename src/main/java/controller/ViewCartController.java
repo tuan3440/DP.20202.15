@@ -26,8 +26,8 @@ public class ViewCartController extends BaseController{
     //Functional Conhesion
   //Data coupling
     public int getCartSubtotal(){
-        int subtotal = SessionInformation.cart.calSubtotal();
-        return subtotal;
+    	//Move an expression inline
+        return SessionInformation.cart.calSubtotal();
     }
 
 }

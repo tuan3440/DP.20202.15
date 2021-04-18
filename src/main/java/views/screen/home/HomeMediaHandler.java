@@ -27,6 +27,10 @@ import views.screen.popup.PopupScreen;
 
 public class HomeMediaHandler extends FXMLScreenHandler implements Observable {
 
+	//Replace a magic number with a named constan
+	private static final int IMAGE_MEDIA_HEIGHT = 160;
+	private static final int IMAGE_MEDIA_WIDTH = 152;
+	
     @FXML
     protected ImageView mediaImage;
 
@@ -70,8 +74,8 @@ public class HomeMediaHandler extends FXMLScreenHandler implements Observable {
         // set the cover image of media
         File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());
-        mediaImage.setFitHeight(160);
-        mediaImage.setFitWidth(152);
+        mediaImage.setFitHeight(IMAGE_MEDIA_HEIGHT);
+        mediaImage.setFitWidth(IMAGE_MEDIA_WIDTH);
         mediaImage.setImage(image);
 
         mediaTitle.setText(media.getTitle());

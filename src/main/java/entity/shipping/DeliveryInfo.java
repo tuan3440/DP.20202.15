@@ -5,6 +5,7 @@ import org.example.DistanceCalculator;
 
 public class DeliveryInfo {
 
+	public final double SHIPPING_FEE = 1.2;//Replace a magic number with a named constant
     protected String name;
     protected String phone;
     protected String province;
@@ -24,7 +25,7 @@ public class DeliveryInfo {
     public int calculateShippingFee(Order order) {   // stamp coupling vì biến order không được sử dụng
 
         int distance = distanceCalculator.calculateDistance(address, province);
-        return (int) (distance * 1.2);
+        return (int) (distance * SHIPPING_FEE);
     }
 
     public String getName() {
