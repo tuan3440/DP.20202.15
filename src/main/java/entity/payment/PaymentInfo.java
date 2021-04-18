@@ -18,6 +18,15 @@ public class PaymentInfo {
 		this.expirationDate = expirationDate;
 		this.securityCode = securityCode;
 	}
+	// Clean Method: Thêm phương thức checkErrorDate
+	private String[] checkErrorDate(){
+		String[] strs = expirationDate.split("/");
+		if (strs.length != 2) {
+			throw new InvalidCardException();
+		}
+		return strs;
+	}
+	
 	/**
 	 * Validate the input date which should be in the format "mm/yy", and then
 	 * return a {@link String String} representing the date in the
@@ -31,10 +40,7 @@ public class PaymentInfo {
 	 */
 
 	public String getExpirationDate() throws InvalidCardException {
-		String[] strs = this.expirationDate.split("/");
-		if (strs.length != 2) {
-			throw new InvalidCardException();
-		}
+		String[] strs = checkErrorDate();
 
 		String expirationDate = null;
 		int month = -1;
