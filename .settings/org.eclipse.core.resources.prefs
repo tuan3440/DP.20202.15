@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/java/controller/PlaceOrderController.java=UTF-8
 encoding//src/main/java/entity/order/Order.java=UTF-8
+encoding//src/main/java/entity/payment/PaymentInfo.java=UTF-8
 encoding//src/main/java/entity/shipping/DeliveryInfo.java=UTF-8
 encoding//src/main/java/subsystem/interbank/InterbankPayloadConverter.java=UTF-8
 encoding//src/main/java/subsystem/interbank/InterbankSubsystemController.java=UTF-8
+encoding//src/main/java/views/screen/cart/CartScreenHandler.java=UTF-8
