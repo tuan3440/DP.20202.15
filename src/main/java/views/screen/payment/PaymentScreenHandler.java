@@ -2,6 +2,7 @@ package views.screen.payment;
 
 import controller.PaymentController;
 import entity.invoice.Invoice;
+import entity.order.PayOrderInfo;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,8 +69,12 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 	void confirmToPayOrder() throws IOException{
 		String contents = "pay order";
 		PaymentController ctrl = (PaymentController) getBController();
-		Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
+		
+		//tao ra doi tuong payOrderInfo thay vi truyen nhieu tham so vao phuong thuc payOrder
+		PayOrderInfo payOrderInfo = new PayOrderInfo(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
 				expirationDate.getText(), securityCode.getText());
+		
+		Map<String, String> response = ctrl.payOrder(payOrderInfo);
 
 		BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);
 		resultScreen.setPreviousScreen(this);

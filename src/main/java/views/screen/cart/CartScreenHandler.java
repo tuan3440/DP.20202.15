@@ -96,6 +96,15 @@ public class CartScreenHandler extends BaseScreenHandler {
 		show();
 	}
 
+	// Clean Method: Thêm phương thức getDisplayShippingForm
+	private void getDisplayShippingForm(ShippingScreenHandler shippingScreenHandler,PlaceOrderController placeOrderController){
+		shippingScreenHandler.setPreviousScreen(this);
+		shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
+		shippingScreenHandler.setScreenTitle("Shipping Screen");
+		shippingScreenHandler.setBController(placeOrderController);
+		shippingScreenHandler.show();
+	}
+
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
@@ -116,11 +125,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			// display shipping form
 			ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
 					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
-			shippingScreenHandler.setPreviousScreen(this);
-			shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
-			shippingScreenHandler.setScreenTitle("Shipping Screen");
-			shippingScreenHandler.setBController(placeOrderController);
-			shippingScreenHandler.show();
+			getDisplayShippingForm(shippingScreenHandler,placeOrderController);
 
 		} catch (MediaNotAvailableException e) {
 			// if some media are not available then display cart and break usecase Place Order

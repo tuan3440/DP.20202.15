@@ -8,7 +8,7 @@ import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
 public class Cart {
-
+	private static final int TOTAL_INITIALIZATION = 0; 
     private static Cart cart;
 
     private List<CartItem> lstCartItem;
@@ -40,20 +40,23 @@ public class Cart {
     //Data coupling
     //Functional Conhesion
     public int getTotalMedia(){
-        int total = 0;
+        int total = TOTAL_INITIALIZATION;
         for (Object obj : lstCartItem) {
             CartItem cm = (CartItem) obj;
             total += cm.getQuantity();
         }
         return total;
     }
+   
+
     //Data coupling
     //Functional Conhesion
+    // thay the bieu thuc tinh toan bang loi goi phuong thuc
     public int calSubtotal(){
-        int total = 0;
+        int total = TOTAL_INITIALIZATION;
         for (Object obj : lstCartItem) {
             CartItem cm = (CartItem) obj;
-            total += cm.getPrice()*cm.getQuantity();
+            total += cm.calPriceOneProduct(cm.getPrice(), cm.getQuantity());
         }
         return total;
     }
@@ -71,9 +74,10 @@ public class Cart {
     }
     //Functional Conhesion
     //Stamp coupling vi no chi su dung 1 thuoc tinh id trong bien media truyen vao
-    public CartItem checkMediaInCart(Media media){
+    // thay the tham so truyen vao media bang tham so IdMedia vi trong phuong thuc chi can dung den idMedia
+    public CartItem checkMediaInCart(int idMedia){
         for (CartItem cartItem : lstCartItem) {
-            if (cartItem.getMedia().getId() == media.getId()) return cartItem;
+            if (cartItem.getMedia().getId() == idMedia) return cartItem;
         }
         return null;
     }

@@ -8,6 +8,7 @@ import common.exception.InvalidCardException;
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
 import entity.cart.Cart;
+import entity.order.PayOrderInfo;
 import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
@@ -26,12 +27,12 @@ public class PaymentController extends BaseController {
 	/**
 	 * Represent the card used for payment
 	 */
-	private CreditCard card;
+	private CreditCard creditCard;
 
 	/**
 	 * Represent the Interbank subsystem
 	 */
-	private InterbankInterface interbank;
+	private InterbankInterface interbankInterface;
 
 	/**
 	 * Validate the input date which should be in the format "mm/yy", and then
@@ -47,12 +48,17 @@ public class PaymentController extends BaseController {
 	
 	//Functional Conhesion
 	//Data coupling
-	private String getExpirationDate(String date) throws InvalidCardException {
+	// Clean Method: Thêm phương thức checkErrorDate
+	private String[] checkErrorDate(String date){
 		String[] strs = date.split("/");
 		if (strs.length != 2) {
 			throw new InvalidCardException();
 		}
+		return strs;
+	}
 
+	private String getExpirationDate(String date) throws InvalidCardException {
+		String[] strs = checkErrorDate(date);
 		String expirationDate = null;
 		int month = -1;
 		int year = -1;
@@ -72,34 +78,21 @@ public class PaymentController extends BaseController {
 		return expirationDate;
 	}
 
-	/**
-	 * Pay order, and then return the result with a message.
-	 * 
-	 * @param amount         - the amount to pay
-	 * @param contents       - the transaction contents
-	 * @param cardNumber     - the card number
-	 * @param cardHolderName - the card holder name
-	 * @param expirationDate - the expiration date in the format "mm/yy"
-	 * @param securityCode   - the cvv/cvc code of the credit card
-	 * @return {@link Map Map} represent the payment result with a
-	 *         message.
-	 */
-
 	//SOLID: vi pham nguyen tac OCP va DIP vi khi thay doi cach thuc thanh toan se phai sua code
 	//Data coupling
-	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
-			String expirationDate, String securityCode) {
+	// thay the nhieu tham so bang 1 doi tuong moi
+	public Map<String, String> payOrder(PayOrderInfo payOrderInfo) {
 		Map<String, String> result = new Hashtable<String, String>();
 		result.put("RESULT", "PAYMENT FAILED!");
 		try {
-			this.card = new CreditCard(
-					cardNumber,
-					cardHolderName,
-					getExpirationDate(expirationDate),
-					Integer.parseInt(securityCode));
+			this.creditCard = new CreditCard(
+					payOrderInfo.getCardNumber(),
+					payOrderInfo.getCardHolderName(),
+					getExpirationDate(payOrderInfo.getExpirationDate()),
+					Integer.parseInt(payOrderInfo.getSecurityCode()));
 
-			this.interbank = new InterbankSubsystem();
-			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
+			this.interbankInterface = new InterbankSubsystem();
+			PaymentTransaction transaction = interbankInterface.payOrder(creditCard, payOrderInfo.getAmount(), payOrderInfo.getContents());
 
 			result.put("RESULT", "PAYMENT SUCCESSFUL!");
 			result.put("MESSAGE", "You have successfully paid the order!");

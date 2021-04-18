@@ -28,6 +28,8 @@ import views.screen.ViewsConfig;
 public class CartMediaHandler extends FXMLScreenHandler {
 
 	private static Logger LOGGER = Utils.getLogger(CartMediaHandler.class.getName());
+	private static final int MEDIA_INFO_HEIGHT = 110;
+	private static final int MEDIA_INFO_WIDTH = 92;
 
 	@FXML
 	protected HBox hboxMedia;
@@ -78,8 +80,8 @@ public class CartMediaHandler extends FXMLScreenHandler {
 		Image im = new Image(file.toURI().toString());
 		image.setImage(im);
 		image.setPreserveRatio(false);
-		image.setFitHeight(110);
-		image.setFitWidth(92);
+		image.setFitHeight(MEDIA_INFO_HEIGHT);
+		image.setFitWidth(MEDIA_INFO_WIDTH);
 
 		// add delete button
 		btnDelete.setFont(ViewsConfig.REGULAR_FONT);

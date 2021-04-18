@@ -17,11 +17,11 @@ public class Order {
     private int tax;
     private List orderMediaList;
     protected DeliveryInfo deliveryInfo;
-
+    public static final int INITIALIZATION_NUMBER = 0;
     public Order() {
-        this.shippingFees = 0;
-        this.subtotal = 0;
-        this.tax = 0;
+        this.shippingFees = INITIALIZATION_NUMBER;
+        this.subtotal = INITIALIZATION_NUMBER;
+        this.tax = INITIALIZATION_NUMBER;
     }
 
     public Order(Cart cart) {

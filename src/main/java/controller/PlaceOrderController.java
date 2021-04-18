@@ -23,7 +23,9 @@ import java.util.regex.Pattern;
  */
 //SOLID: vi pham nguyen tac SRP  vi 1 lop PlaceOrderController co 2 nhiem vu : 1 la Order , 2 la Validate cac thanh phan cua Order
 public class PlaceOrderController extends BaseController {
-
+	public static final int LENGTH_MAX_PHONENUMBER = 10;
+	public static final String START_PHONENUMBER_CHARACTER = "0";
+	public static final String PATTERN_STRING = "^[a-zA-Z\\s]*$";
     /**
      * Just for logging purpose
      */
@@ -93,17 +95,22 @@ public class PlaceOrderController extends BaseController {
     //(Bui Minh Tuan) minh nghi cho nay là Data coupling vi 3 bien trong ham if thi khac nhau va cac gia tri cua no co the kiem soat duoc
     //Control coupling do info lÃ  tham sá»‘ vá»� máº·t control
     //Tá»©c lÃ  nÃ³ Ä‘iá»ƒu kiá»ƒu luá»“ng cá»§a module Ä‘Æ°á»£c gá»�i
+    //Introduce an intermediate variable
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
-        if (validatePhoneNumber(info.get("phone"))
-        || validateName(info.get("name"))
-        || validateAddress(info.get("address"))) return;
+        final boolean isPhoneNumber = validatePhoneNumber(info.get("phone"));
+        final boolean isName = validateName(info.get("name"));
+        final boolean isAddress = validateAddress(info.get("address"));
+        
+    	if (isPhoneNumber
+        || isName
+        || isAddress) return;
         else throw new InvalidDeliveryInfoException();
     }
     //Functional Conhesion
     //Data coupling
     public boolean validatePhoneNumber(String phoneNumber) {
-        if (phoneNumber.length() != 10) return false;
-        if (!phoneNumber.startsWith("0")) return false;
+        if (phoneNumber.length() != LENGTH_MAX_PHONENUMBER) return false;
+        if (!phoneNumber.startsWith(START_PHONENUMBER_CHARACTER)) return false;
         try {
             Integer.parseInt(phoneNumber);
         } catch (NumberFormatException e) {
@@ -115,7 +122,7 @@ public class PlaceOrderController extends BaseController {
     //Data coupling
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
-        String patternString = "^[a-zA-Z\\s]*$";
+        String patternString = PATTERN_STRING;
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
@@ -124,7 +131,7 @@ public class PlaceOrderController extends BaseController {
     //Data coupling
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
-        String patternString = "^[a-zA-Z\\s]*$";
+        String patternString = PATTERN_STRING;
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(address);
         return matcher.matches();

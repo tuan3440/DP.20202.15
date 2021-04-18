@@ -19,8 +19,8 @@ public class BaseController {
      */
 	//Data coupling
 	//Functional Conhesion
-    public CartItem checkMediaInCart(Media media){
-        return SessionInformation.cart.checkMediaInCart(media);
+    public CartItem checkMediaInCart(int idMedia){
+        return SessionInformation.cart.checkMediaInCart(idMedia);
     }
 
     /**
