@@ -1,8 +1,10 @@
 package subsystem.interbank;
 
 import common.exception.*;
+import entity.payment.Card;
 import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
+import utils.MfDate;
 import utils.MyMap;
 
 import java.text.DateFormat;
@@ -22,7 +24,7 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
-    String convertToRequestPayload(CreditCard card, int amount, String contents) {  
+    String convertToRequestPayload(Card card, int amount, String contents) {  
         Map<String, Object> transaction = new MyMap();
 
         try {
@@ -34,7 +36,7 @@ public class InterbankPayloadConverter {
         transaction.put("command", InterbankConfigs.PAY_COMMAND); 
         transaction.put("transactionContent", contents);
         transaction.put("amount", amount);
-        transaction.put("createdAt", getToday());
+        transaction.put("createdAt",MfDate.getToday());
 
         Map<String, Object> requestMap = new MyMap();
         requestMap.put("version", InterbankConfigs.VERSION); 
@@ -106,18 +108,5 @@ public class InterbankPayloadConverter {
             throw new UnrecognizedException();
         }
         return response;
-    }
-
-    /**
-     * Return a {@link String String} that represents the current time in the format of yyyy-MM-dd HH:mm:ss.
-     *
-     * @author hieudm
-     * @return the current time as {@link String String}.
-     */
-    private String getToday() {     //Coincidental Cohesion vi phuong thuc nay khong lien quan den cac phuong thuc con lai cua class
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        return dateFormat.format(date);
     }
 }
