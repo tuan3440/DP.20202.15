@@ -27,12 +27,12 @@ public class PaymentController extends BaseController {
 	/**
 	 * Represent the card used for payment
 	 */
-	private CreditCard card;
+	private CreditCard creditCard;
 
 	/**
 	 * Represent the Interbank subsystem
 	 */
-	private InterbankInterface interbank;
+	private InterbankInterface interbankInterface;
 	/**
 	 * Pay order, and then return the result with a message.
 	 * 
@@ -53,10 +53,10 @@ public class PaymentController extends BaseController {
 		Map<String, String> result = new Hashtable<String, String>();
 		result.put("RESULT", "PAYMENT FAILED!");
 		try {
-			this.card = info.getCard();
+			this.creditCard = info.getCard();
 
-			this.interbank = new InterbankSubsystem();
-			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
+			this.interbankInterface = new InterbankSubsystem();
+			PaymentTransaction transaction = interbankInterface.payOrder(creditCard, amount, contents);
 
 			result.put("RESULT", "PAYMENT SUCCESSFUL!");
 			result.put("MESSAGE", "You have successfully paid the order!");

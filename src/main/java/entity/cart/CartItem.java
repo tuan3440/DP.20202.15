@@ -41,7 +41,9 @@ public class CartItem {
     public void setPrice(int price) {
         this.price = price;
     }
-
+    public int calPriceOneProduct(int price, int quantity) {
+    	return price*quantity;
+    }
     @Override
     public String toString() {
         return "{" 

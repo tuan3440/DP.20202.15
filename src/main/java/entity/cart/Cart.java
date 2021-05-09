@@ -53,7 +53,7 @@ public class Cart {
         int total = 0;
         for (Object obj : lstCartItem) {
             CartItem cm = (CartItem) obj;
-            total += cm.getPrice()*cm.getQuantity();
+            total += cm.calPriceOneProduct(cm.getPrice(), cm.getQuantity());
         }
         return total;
     }
@@ -71,9 +71,9 @@ public class Cart {
     }
     //Functional Conhesion
     //Stamp coupling vi no chi su dung 1 thuoc tinh id trong bien media truyen vao
-    public CartItem checkMediaInCart(Media media){
+    public CartItem checkMediaInCart(int idMedia){
         for (CartItem cartItem : lstCartItem) {
-            if (cartItem.getMedia().getId() == media.getId()) return cartItem;
+            if (cartItem.getMedia().getId() == idMedia) return cartItem;
         }
         return null;
     }
