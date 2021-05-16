@@ -4,14 +4,14 @@ import java.util.Calendar;
 
 import common.exception.InvalidCardException;
 
-public class PaymentInfo {
+public class PaymentCreditCardInfo{
 	private String cardNumber;
 	private String cardHolderName;
 
 	private String expirationDate;
 	private String securityCode;
 	
-	public PaymentInfo(String cardNumber, String cardHolderName, String expirationDate, String securityCode) {
+	public PaymentCreditCardInfo(String cardNumber, String cardHolderName, String expirationDate, String securityCode) {
 		super();
 		this.cardNumber = cardNumber;
 		this.cardHolderName = cardHolderName;
@@ -61,13 +61,6 @@ public class PaymentInfo {
 		return expirationDate;
 	}
 
-	public CreditCard getCard () {
-		return new CreditCard(cardNumber,
-					cardHolderName,
-					getExpirationDate(),
-					Integer.parseInt(securityCode));
-	}
-	
 	public String getCardNumber() {
 		return cardNumber;
 	}

@@ -8,8 +8,9 @@ import common.exception.InvalidCardException;
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
 import entity.cart.Cart;
+import entity.payment.CardStrategy;
 import entity.payment.CreditCard;
-import entity.payment.PaymentInfo;
+import entity.payment.PaymentCreditCardInfo;
 import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
@@ -27,7 +28,7 @@ public class PaymentController extends BaseController {
 	/**
 	 * Represent the card used for payment
 	 */
-	private CreditCard card;
+	private CardStrategy card;
 
 	/**
 	 * Represent the Interbank subsystem
@@ -46,15 +47,16 @@ public class PaymentController extends BaseController {
 	 *         message.
 	 */
 
+	public void setCardStrategy (CardStrategy card) {
+		this.card = card;
+	}
 	//SOLID: vi pham nguyen tac OCP va DIP vi khi thay doi cach thuc thanh toan se phai sua code
 	//Data coupling
 	//Introduce Parameter Object
-	public Map<String, String> payOrder(int amount, String contents, PaymentInfo info) {
+	public Map<String, String> payOrder(int amount, String contents) {
 		Map<String, String> result = new Hashtable<String, String>();
 		result.put("RESULT", "PAYMENT FAILED!");
 		try {
-			this.card = info.getCard();
-
 			this.interbank = new InterbankSubsystem();
 			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
 
