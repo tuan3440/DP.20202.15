@@ -4,6 +4,8 @@ import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.shipping.DeliveryInfo;
+import entity.shipping.DistanceCaculator;
+import entity.shipping.DistanceStrategy;
 import views.screen.ViewsConfig;
 
 import java.util.ArrayList;
@@ -54,6 +56,7 @@ public class Order {
     //Temporal cohesion vi thuc hien 2 viec cung luc
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
+        this.deliveryInfo.setDistanceStrategy(new DistanceCaculator());
         this.shippingFees = deliveryInfo.calculateShippingFee(this);
     }
 
