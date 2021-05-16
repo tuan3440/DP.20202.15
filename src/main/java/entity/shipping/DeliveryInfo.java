@@ -11,20 +11,18 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;  //SOLID: vi pham nguyen ly OCP vi sau nay neu su dung thu vien khac se phai sua truc tiep ma nguon
+    protected ICaculateDistance distanceCalculator;  //SOLID: vi pham nguyen ly OCP vi sau nay neu su dung thu vien khac se phai sua truc tiep ma nguon
 
-    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
+    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions) {
         this.name = name;
         this.phone = phone;
         this.province = province;
         this.address = address;
         this.shippingInstructions = shippingInstructions;
-        this.distanceCalculator = distanceCalculator;
     }
     //SOLID: vi pham nguyen ly OCP vi sau nay se thay doi cach tinh phi ship
     public int calculateShippingFee(Order order) {   // stamp coupling vì biến order không được sử dụng
-
-        int distance = distanceCalculator.calculateDistance(address, province);
+        int distance = distanceCalculator.CaculateDistance(province, address);
         return (int) (distance * SHIPPING_FEE);
     }
 
@@ -47,4 +45,15 @@ public class DeliveryInfo {
     public String getShippingInstructions() {
         return shippingInstructions;
     }
+    
+    public void setDistanceCaculator (ICaculateDistance caculateDistance) {
+    	this.distanceCalculator = caculateDistance;
+    }
+	@Override
+	public String toString() {
+		return "DeliveryInfo [SHIPPING_FEE=" + SHIPPING_FEE + ", name=" + name + ", phone=" + phone + ", province="
+				+ province + ", address=" + address + ", shippingInstructions=" + shippingInstructions
+				+ ", distanceCalculator=" + distanceCalculator + "]";
+	}
+    
 }
