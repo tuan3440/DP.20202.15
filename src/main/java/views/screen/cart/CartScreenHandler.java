@@ -100,7 +100,7 @@ public class CartScreenHandler extends BaseScreenHandler implements Observer{
 	
 	@Override
 	protected void setupData(Object dto) throws Exception {
-		displayCartWithMediaAvailability();
+		
 	}
 
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
@@ -180,7 +180,6 @@ public class CartScreenHandler extends BaseScreenHandler implements Observer{
 				CartItem cartItem = (CartItem) cm;
 				CartMediaHandler mediaCartScreen = new CartMediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
 				mediaCartScreen.setCartItem(cartItem);
-				mediaCartScreen.attach(this);
 				// add spinner
 				vboxCart.getChildren().add(mediaCartScreen.getContent());
 			}
