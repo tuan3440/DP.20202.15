@@ -3,11 +3,14 @@ package views.screen.cart;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
+import common.interfaces.Observable;
 import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
@@ -24,8 +27,10 @@ import javafx.scene.layout.VBox;
 import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
+import common.interfaces.Observable;
+import common.interfaces.Observer;
 
-public class CartMediaHandler extends FXMLScreenHandler {
+public class CartMediaHandler extends FXMLScreenHandler implements Observable{
 
 	private static final int MEDIA_INFO_HEIGHT = 110; //Replace a magic number with a named constant
 	private static final int MEDIA_INFO_WIDTH = 92;
@@ -62,11 +67,17 @@ public class CartMediaHandler extends FXMLScreenHandler {
 	private CartItem cartItem;
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
+	private List<Observer> observerList;
 
 	public CartMediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
 		hboxMedia.setAlignment(Pos.CENTER);
+		this.observerList = new ArrayList<>();
+		btnDelete.setOnMouseClicked(event -> {
+			SessionInformation.cart.removeCartMedia(cartItem);
+            notifyObservers();
+        });
 	}
 	
 	public void setCartItem(CartItem cartItem) {
@@ -86,16 +97,16 @@ public class CartMediaHandler extends FXMLScreenHandler {
 
 		// add delete button
 		btnDelete.setFont(ViewsConfig.REGULAR_FONT);
-		btnDelete.setOnMouseClicked(e -> {
-			try {
-				SessionInformation.cart.removeCartMedia(cartItem); // update user cart
-				cartScreen.updateCart(); // re-display user cart
-				LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
-			} catch (SQLException exp) {
-				exp.printStackTrace();
-				throw new ViewCartException();
-			}
-		});
+//		btnDelete.setOnMouseClicked(e -> {
+//			try {
+//				SessionInformation.cart.removeCartMedia(cartItem); // update user cart
+//				cartScreen.updateCart(); // re-display user cart
+//				LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
+//			} catch (SQLException exp) {
+//				exp.printStackTrace();
+//				throw new ViewCartException();
+//			}
+//		});
 
 		initializeSpinner();
 	}
@@ -132,5 +143,23 @@ public class CartMediaHandler extends FXMLScreenHandler {
 		});
 		spinnerFX.setAlignment(Pos.CENTER);
 		spinnerFX.getChildren().add(this.spinner);
+	}
+
+	@Override
+	public void attach(Observer observer) {
+		// TODO Auto-generated method stub
+		observerList.add(observer);
+	}
+
+	@Override
+	public void remove(Observer observer) {
+		// TODO Auto-generated method stub
+		observerList.remove(observer);
+	}
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		observerList.forEach(observer -> observer.update(this));
 	}
 }
