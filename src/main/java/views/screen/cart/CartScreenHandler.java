@@ -3,15 +3,23 @@ package views.screen.cart;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
+import common.interfaces.Observable;
+import common.interfaces.Observer;
+import controller.AuthenticationController;
+import controller.HomeController;
 import controller.PlaceOrderController;
+import controller.SessionInformation;
 import controller.ViewCartController;
+import entity.cart.Cart;
 import entity.cart.CartItem;
+import entity.media.Media;
 import entity.order.Order;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,10 +31,11 @@ import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
+import views.screen.home.HomeMediaHandler;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
-public class CartScreenHandler extends BaseScreenHandler {
+public class CartScreenHandler extends BaseScreenHandler implements Observer{
 	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
 	@FXML
@@ -52,7 +61,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private Button btnPlaceOrder;
-
+    private AuthenticationController authenticationController;
+    
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath,null);
 		
@@ -86,6 +96,11 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 	public ViewCartController getBController(){
 		return (ViewCartController) super.getBController();
+	}
+	
+	@Override
+	protected void setupData(Object dto) throws Exception {
+		
 	}
 
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
@@ -165,7 +180,6 @@ public class CartScreenHandler extends BaseScreenHandler {
 				CartItem cartItem = (CartItem) cm;
 				CartMediaHandler mediaCartScreen = new CartMediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
 				mediaCartScreen.setCartItem(cartItem);
-
 				// add spinner
 				vboxCart.getChildren().add(mediaCartScreen.getContent());
 			}
@@ -176,9 +190,22 @@ public class CartScreenHandler extends BaseScreenHandler {
 		}
 	}
 
+
+
 	@Override
-	protected void setupData(Object dto) throws Exception {
+	public void update(Observable observable) {
 		// TODO Auto-generated method stub
-		
+		 if (observable instanceof CartMediaHandler) update((CartMediaHandler) observable);
 	}
+	
+    private void update(CartMediaHandler mediaHandler) {
+    	try {
+			updateCart();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+	
+	
 }
