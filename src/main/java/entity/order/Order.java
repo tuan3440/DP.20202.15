@@ -4,7 +4,6 @@ import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.shipping.DeliveryInfo;
-import entity.shipping.DistanceCaculator;
 import views.screen.ViewsConfig;
 
 import java.util.ArrayList;
